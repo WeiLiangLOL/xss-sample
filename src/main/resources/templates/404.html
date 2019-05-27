@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XSS</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="http://innovademo.com/contentbuilder/assets/minimalist-blocks/content.css"
+	rel="stylesheet">
+<link
+	href="http://innovademo.com/contentbuilder/contentbuilder/contentbuilder.css"
+	rel="stylesheet" type="text/css">
+</head>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script
+	src="http://innovademo.com/contentbuilder/contentbuilder/contentbuilder.min.js"
+	type="text/javascript"></script>
+<script
+	src="http://innovademo.com/contentbuilder/assets/minimalist-blocks/content.js"
+	type="text/javascript"></script>
+<body>
+	<div class="container">
+
+		<div class="row clearfix">
+			<div class="column full center">
+				<div class="spacer height-80"></div>
+				<h1 class="size-196"
+					style="letter-spacing: 12px; margin-bottom: 10px">404</h1>
+				<h3 class="size-32" style="letter-spacing: 8px;">ITEM NOT FOUND</h3>
+				<p class="size-21">
+					We are unable to find "<span id="page"></span>". The product might
+					have been removed, or out of stock.
+				</p>
+			</div>
+		</div>
+
+	</div>
+	<script>
+		$.urlParam = function(name) {
+			var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+					.exec(window.location.href);
+			if (results == null) {
+				return null;
+			}
+			return decodeURI(results[1]) || 0;
+		}
+
+		var query = $.urlParam("q");
+		if (query != null)
+			$("#page").html(query);
+		else
+			$("#page").html("undefined");
+	</script>
+</body>
+</html>
